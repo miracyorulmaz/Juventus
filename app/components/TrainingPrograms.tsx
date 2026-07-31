@@ -1,33 +1,42 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, TrendingUp, Award, Clock, Users } from 'lucide-react';
+import { Sparkles, TrendingUp, Award, Trophy, Clock, Users } from 'lucide-react';
 
 const programs = [
   {
     icon: Sparkles,
-    title: 'U6 - U9',
-    subtitle: 'Başlangıç Grubu',
-    desc: 'Temel futbol becerileri, koordinasyon gelişimi ve oyun eğlencesiyle futbola ilk adım.',
-    hours: 'Haftada 2 antrenman',
+    title: '3 - 6 Yaş',
+    subtitle: 'Mini Başlangıç Grubu',
+    desc: 'Top ile tanışma, temel koordinasyon ve oyun eğlencesiyle futbola ilk adım.',
+    hours: 'Haftada 2-4 antrenman',
     ratio: '1:6 antrenör-oyuncu',
     highlight: false,
   },
   {
     icon: TrendingUp,
-    title: 'U10 - U13',
-    subtitle: 'Gelişim Grubu',
-    desc: 'Teknik beceri geliştirme, taktik anlayışı ve takım çalışması odaklı eğitim.',
-    hours: 'Haftada 3 antrenman',
+    title: '6 - 9 Yaş',
+    subtitle: 'Başlangıç Grubu',
+    desc: 'Temel futbol becerileri, koordinasyon gelişimi ve takımla ilk tanışma.',
+    hours: 'Haftada 2-4 antrenman',
     ratio: '1:8 antrenör-oyuncu',
     highlight: true,
   },
   {
     icon: Award,
-    title: 'U14 - U17',
+    title: '9 - 12 Yaş',
+    subtitle: 'Gelişim Grubu',
+    desc: 'Teknik beceri geliştirme, taktik anlayışı ve takım çalışması odaklı eğitim.',
+    hours: 'Haftada 2-4 antrenman',
+    ratio: '1:8 antrenör-oyuncu',
+    highlight: false,
+  },
+  {
+    icon: Trophy,
+    title: '12 - 15 Yaş',
     subtitle: 'Performans Grubu',
     desc: 'İleri seviye taktik, fiziksel kondisyon ve rekabetçi maç ortamı.',
-    hours: 'Haftada 4 antrenman',
+    hours: 'Haftada 2-4 antrenman',
     ratio: '1:10 antrenör-oyuncu',
     highlight: false,
   },
@@ -64,7 +73,7 @@ export default function TrainingPrograms() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {programs.map((p, i) => (
             <motion.div
               key={p.title}
@@ -72,9 +81,9 @@ export default function TrainingPrograms() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className={`group relative rounded-3xl p-8 md:p-10 border transition-all duration-500 flex flex-col ${
+              className={`group relative rounded-3xl p-6 md:p-8 border transition-all duration-500 flex flex-col ${
                 p.highlight
-                  ? 'bg-gradient-to-b from-amber-400/10 to-transparent border-amber-400/30 md:scale-105'
+                  ? 'bg-gradient-to-b from-amber-400/10 to-transparent border-amber-400/30'
                   : 'bg-[#0A0A0A] border-white/5 hover:border-amber-400/20'
               }`}
             >

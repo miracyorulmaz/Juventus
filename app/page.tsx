@@ -2,9 +2,9 @@ import HeroSection from './components/HeroSection';
 import TrustAndBranding from './components/TrustAndBranding';
 import TrainingPrograms from './components/TrainingPrograms';
 import AcademyFeatures from './components/AcademyFeatures';
+import CoachingStaff from './components/CoachingStaff';
 import RegistrationForm from './components/RegistrationForm';
 import GallerySection from './components/GallerySection';
-import JuventusLogo from './components/JuventusLogo';
 
 export default function Home() {
   return (
@@ -23,6 +23,7 @@ export default function Home() {
         <GallerySection />
         <TrainingPrograms />
         <AcademyFeatures />
+        <CoachingStaff />
         <RegistrationForm />
         <Footer />
       </div>
@@ -36,11 +37,12 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <JuventusLogo className="w-10 h-auto" color="white" />
-              <h3 className="text-lg font-bold text-white">
-                Juventus Academy <span className="block text-sm text-white/50 font-normal">Batıkent</span>
-              </h3>
+            <div className="mb-4 inline-block bg-white rounded-xl px-3 py-2">
+              <img
+                src="/images/juventus-academy-logo.png"
+                alt="Juventus Academy Ankara"
+                className="w-32 h-auto"
+              />
             </div>
             <p className="text-white/40 text-sm leading-relaxed">
               Juventus FC resmi ortaklığıyla, Batıkent'te dünya standartlarında futbol eğitimi. İtalyan disiplini ve metodolojisi ile geleceğin yıldızlarını yetiştiriyoruz.
@@ -60,8 +62,9 @@ function Footer() {
             <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">İletişim</h4>
             <div className="space-y-2 text-sm text-white/40">
               <p>Batıkent, Ankara</p>
-              <p className="text-white/60">+90 (312) XXX XX XX</p>
-              <p className="text-white/60">info@juventusakademi.com.tr</p>
+              <p className="text-white/60">0540 005 10 57</p>
+              <p className="text-white/60">0538 929 98 06</p>
+              <p className="text-white/60">juventusacademybatikent@gmail.com</p>
             </div>
           </div>
         </div>

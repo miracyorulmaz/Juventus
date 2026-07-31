@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Juventus Academy Batıkent | Resmi Juventus Okulu',
   description:
-    "Juventus FC resmi ortaklığıyla, Batıkent'te dünya standartlarında altyapı ve futbol eğitimi. 4-17 yaş arası çocuklar için profesyonel futbol akademisi.",
-  icons: { icon: '/favicon.ico' },
+    "Juventus FC resmi ortaklığıyla, Batıkent'te dünya standartlarında altyapı ve futbol eğitimi. 3-15 yaş arası çocuklar için profesyonel futbol akademisi.",
+  icons: { icon: '/images/juventus-academy-logo.png' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

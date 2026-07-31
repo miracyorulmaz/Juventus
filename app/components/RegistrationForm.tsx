@@ -16,7 +16,7 @@ export default function RegistrationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const dayList = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+  const dayList = ['Salı - Çarşamba Paketi', 'Cumartesi - Pazar Paketi', 'Her İkisi de'];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -147,7 +147,7 @@ export default function RegistrationForm() {
                     </label>
                     <select name="birthYear" value={form.birthYear} onChange={handleChange} className={inputClass('birthYear') + ' cursor-pointer'}>
                       <option value="">Seçiniz</option>
-                      {Array.from({ length: 14 }, (_, i) => 2024 - i).map((y) => (
+                      {Array.from({ length: 13 }, (_, i) => 2023 - i).map((y) => (
                         <option key={y} value={y}>{y}</option>
                       ))}
                     </select>
@@ -164,7 +164,7 @@ export default function RegistrationForm() {
 
                 <div>
                   <label className="text-white/50 text-xs uppercase tracking-wider font-semibold block mb-3">
-                    Tercih Edilen Günler
+                    Tercih Edilen Antrenman Paketi
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {dayList.map((d) => {
@@ -194,7 +194,7 @@ export default function RegistrationForm() {
                 >
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   <Shield className="w-4 h-4" />
-                  Ücretsiz Deneme İçin Başvur
+                  Buradan Hemen Kayıt Ol (Ücretsiz Deneme)
                 </button>
               </motion.form>
             )}

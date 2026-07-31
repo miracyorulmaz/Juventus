@@ -4,28 +4,28 @@ import { motion } from 'framer-motion';
 
 const PHOTOS = [
   {
-    src: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=600&q=80',
-    title: 'Profesyonel Antrenman',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&q=80',
-    title: 'Takım Ruhu',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80',
-    title: 'Maç Günü',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1608245446630-872c182e2bf7?w=600&q=80',
+    src: '/images/gallery/gallery-1.jpg',
     title: 'Teknik Gelişim',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600679472829-3044539ce8ed?w=600&q=80',
+    src: '/images/gallery/gallery-2.jpg',
     title: 'Sahada Disiplin',
   },
   {
-    src: 'https://images.unsplash.com/photo-1552667466-07770ae110d0?w=600&q=80',
+    src: '/images/gallery/gallery-3.jpg',
+    title: 'Takım Ruhu',
+  },
+  {
+    src: '/images/gallery/gallery-4.jpg',
     title: 'Geleceğin Yıldızları',
+  },
+  {
+    src: '/images/gallery/gallery-5.jpg',
+    title: 'Profesyonel Antrenman',
+  },
+  {
+    src: '/images/gallery/gallery-6.jpg',
+    title: 'Maç Günü',
   },
 ];
 

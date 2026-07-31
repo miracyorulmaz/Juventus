@@ -7,8 +7,8 @@ export default function TrustAndBranding() {
   const stats = [
     { icon: Trophy, value: '15+', label: 'UEFA Lisanslı Antrenör' },
     { icon: Users, value: '500+', label: 'Lisanslı Sporcu' },
-    { icon: Award, value: '4-17', label: 'Yaş Grubu' },
-    { icon: Plane, value: 'İtalya', label: 'Yıllık Kamp Fırsatı' },
+    { icon: Award, value: '3-15', label: 'Yaş Grubu' },
+    { icon: Plane, value: 'İtalya', label: "İtalya'da ve Yurt İçinde Kamp Fırsatı" },
   ];
 
   return (

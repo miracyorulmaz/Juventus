@@ -2,13 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown, Shield, Star } from 'lucide-react';
-import JuventusLogo from './JuventusLogo';
-
-const YOUTH_PHOTOS = [
-  'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=800&q=80',
-  'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80',
-  'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=800&q=80',
-];
 
 export default function HeroSection() {
   const scrollTo = (id: string) => {
@@ -20,8 +13,8 @@ export default function HeroSection() {
       {/* Hero background — youth football photo with overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src={YOUTH_PHOTOS[0]}
-          alt="Juventus Academy Youth Training"
+          src="/images/hero-bg.jpg"
+          alt="Juventus Academy Batıkent Antrenman"
           className="w-full h-full object-cover object-center opacity-50"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black" />
@@ -44,9 +37,13 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            className="mb-6"
+            className="mb-6 bg-white rounded-2xl md:rounded-3xl px-5 py-3 md:px-7 md:py-4 shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
           >
-            <JuventusLogo className="w-24 h-auto md:w-28" color="white" />
+            <img
+              src="/images/juventus-academy-logo.png"
+              alt="Juventus Academy Ankara"
+              className="w-40 sm:w-48 md:w-56 h-auto"
+            />
           </motion.div>
 
           {/* Official Tag */}
@@ -68,15 +65,15 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1] max-w-4xl mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mb-6"
           >
-            Geleceğin Yıldızları{' '}
+            Resmi{' '}
             <span className="relative inline-block">
               <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-amber-400 to-amber-200">
                 Juventus
               </span>
             </span>{' '}
-            Ekolüyle Sahada
+            Ortaklığı İle Ankara Batıkent&apos;te, Dünya Standartlarında Futbol Eğitimi
           </motion.h1>
 
           {/* Subtitle */}
@@ -103,7 +100,7 @@ export default function HeroSection() {
             >
               <span className="relative z-10 flex items-center gap-2">
                 <Shield className="w-4 h-4" />
-                Hemen Kayıt Ol
+                Ücretsiz Deneme İçin Hemen Kayıt Ol
               </span>
             </button>
             <button
