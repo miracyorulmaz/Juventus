@@ -37,3 +37,8 @@ next-env.d.ts
 
 # temporary files
 *.png
+
+# Production brand assets are required by the deployed site.
+!public/images/brand/
+!public/images/brand/academy-logo-light.png
+!public/images/brand/academy-logo-dark.png
