@@ -1,7 +1,20 @@
-// Juventus FC 2017+ Official Logo
-export default function JuventusLogo({ className = 'w-24 h-auto', color = 'currentColor' }: { className?: string; color?: string }) {
+// Inline mark keeps the brand visible even if a static logo asset fails.
+export default function JuventusLogo({
+  className = 'w-24 h-auto',
+  color = 'currentColor',
+}: {
+  className?: string;
+  color?: string;
+}) {
   return (
-    <svg viewBox="0 0 500 500" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 500 500"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
       {/* Outer shield/circle */}
       <path d="M250 420C343.4 420 420 343.4 420 250C420 156.6 343.4 80 250 80C156.6 80 80 156.6 80 250C80 343.4 156.6 420 250 420Z" stroke={color} strokeWidth="12" />
       <path d="M250 450C360.4 450 450 360.4 450 250C450 139.6 360.4 50 250 50C139.6 50 50 139.6 50 250C50 360.4 139.6 450 250 450Z" stroke={color} strokeWidth="3" />

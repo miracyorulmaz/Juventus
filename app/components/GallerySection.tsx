@@ -4,83 +4,120 @@ import { motion } from 'framer-motion';
 
 const PHOTOS = [
   {
-    src: '/images/gallery/gallery-1.jpg',
-    title: 'Teknik Gelişim',
+    src: '/images/gallery/academy/joy-and-ball.webp',
+    title: 'Futbolla İlk Heyecan',
+    layout: 'col-span-2 row-span-2',
+    position: 'center 42%',
   },
   {
-    src: '/images/gallery/gallery-2.jpg',
-    title: 'Sahada Disiplin',
+    src: '/images/gallery/academy/welcome-wave.webp',
+    title: 'Sahada Neşe',
+    layout: 'row-span-2',
+    position: 'center 38%',
   },
   {
-    src: '/images/gallery/gallery-3.jpg',
+    src: '/images/gallery/academy/coach-on-ball.webp',
+    title: 'Uzman Antrenörlük',
+  },
+  {
+    src: '/images/gallery/academy/team-spirit.webp',
     title: 'Takım Ruhu',
   },
   {
-    src: '/images/gallery/gallery-4.jpg',
-    title: 'Geleceğin Yıldızları',
+    src: '/images/gallery/academy/training-detail.webp',
+    title: 'Teknik Detaylar',
+    layout: 'col-span-2',
+    position: 'center 64%',
   },
   {
-    src: '/images/gallery/gallery-5.jpg',
-    title: 'Profesyonel Antrenman',
+    src: '/images/gallery/academy/academy-play.webp',
+    title: 'Futbolun Eğlencesi',
   },
   {
-    src: '/images/gallery/gallery-6.jpg',
-    title: 'Maç Günü',
+    src: '/images/gallery/academy/focused-training.webp',
+    title: 'Odak ve Disiplin',
+  },
+  {
+    src: '/images/gallery/academy/first-steps.webp',
+    title: 'İlk Adımlar',
+    layout: 'row-span-2',
+    position: 'center 38%',
+  },
+  {
+    src: '/images/gallery/academy/guided-training.webp',
+    title: 'Birebir Yönlendirme',
+  },
+  {
+    src: '/images/gallery/academy/ball-control.webp',
+    title: 'Top Kontrolü',
+    layout: 'col-span-2',
+  },
+  {
+    src: '/images/gallery/academy/academy-smile.webp',
+    title: 'Akademi Gülümsemesi',
+    position: 'center 32%',
+  },
+  {
+    src: '/images/gallery/academy/sideline-control.webp',
+    title: 'Oyuna Hazırlık',
   },
 ];
 
 export default function GallerySection() {
   return (
-    <section className="relative bg-black py-20 md:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#050505] to-black pointer-events-none" />
+    <section
+      id="galeri"
+      className="relative scroll-mt-20 overflow-hidden bg-black py-20 md:py-32"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black via-[#050505] to-black" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <p className="text-amber-400/80 text-xs md:text-sm uppercase tracking-[0.3em] mb-4 font-semibold">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-amber-400/80 md:text-sm">
             Galeri
           </p>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4">
-            Sahadan <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-400">Kareler</span>
+          <h2 className="mb-4 text-3xl font-extrabold text-white md:text-5xl">
+            Sahadan{' '}
+            <span className="bg-gradient-to-r from-amber-300 to-amber-400 bg-clip-text text-transparent">
+              Kareler
+            </span>
           </h2>
-          <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto">
-            Juventus Academy Batıkent'te çocuklarımızın antrenman ve maç anları
+          <p className="mx-auto max-w-2xl text-base text-white/50 md:text-lg">
+            Juventus Academy Batıkent&apos;te çocuklarımızın antrenman ve maç anları
           </p>
         </motion.div>
 
-        {/* Photo grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {PHOTOS.map((photo, i) => (
-            <motion.div
-              key={i}
+        <div className="grid grid-flow-row-dense grid-cols-2 auto-rows-[180px] gap-3 sm:auto-rows-[230px] md:grid-cols-3 md:auto-rows-[250px] md:gap-4 lg:auto-rows-[290px]">
+          {PHOTOS.map((photo, index) => (
+            <motion.figure
+              key={photo.src}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`group relative overflow-hidden rounded-2xl md:rounded-3xl ${
-                i === 0 ? 'md:col-span-2 md:row-span-2' : ''
-              } ${i === 3 ? 'md:col-span-2' : ''}`}
+              transition={{ duration: 0.55, delay: Math.min(index * 0.06, 0.3) }}
+              className={`group relative isolate overflow-hidden rounded-2xl bg-[#0A0A0A] md:rounded-3xl ${photo.layout ?? ''}`}
             >
-              <div className="aspect-[4/3] md:aspect-[3/2]">
-                <img
-                  src={photo.src}
-                  alt={photo.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <p className="text-white text-sm md:text-base font-semibold">{photo.title}</p>
-              </div>
-            </motion.div>
+              <img
+                src={photo.src}
+                alt={photo.title}
+                loading="lazy"
+                decoding="async"
+                style={{ objectPosition: photo.position ?? 'center' }}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/5 to-transparent opacity-75 transition-opacity duration-500 group-hover:opacity-100" />
+              <figcaption className="absolute inset-x-0 bottom-0 p-4 transition-transform duration-500 group-hover:-translate-y-1 md:p-6">
+                <span className="text-sm font-semibold text-white md:text-base">
+                  {photo.title}
+                </span>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
       </div>

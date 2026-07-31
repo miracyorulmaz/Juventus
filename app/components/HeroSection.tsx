@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown, Shield, Star } from 'lucide-react';
+import AcademyLogo from './AcademyLogo';
 
 export default function HeroSection() {
   const scrollTo = (id: string) => {
@@ -9,7 +10,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden flex items-center">
+    <section id="anasayfa" className="relative min-h-screen bg-black overflow-hidden flex items-center scroll-mt-20">
       {/* Hero background — youth football photo with overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -30,19 +31,19 @@ export default function HeroSection() {
       />
 
       {/* Main content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-20 md:py-24">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pb-20 pt-28 sm:pt-32 md:pb-24 md:pt-36">
         <div className="flex flex-col items-center text-center">
           {/* Juventus Official Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            className="mb-6 bg-white rounded-2xl md:rounded-3xl px-5 py-3 md:px-7 md:py-4 shadow-[0_8px_40px_rgba(0,0,0,0.4)]"
+            className="mb-6 rounded-2xl bg-white px-6 py-4 shadow-[0_8px_40px_rgba(0,0,0,0.4)] md:rounded-3xl md:px-8 md:py-5"
           >
-            <img
-              src="/images/juventus-academy-logo.png"
-              alt="Juventus Academy Ankara"
-              className="w-40 sm:w-48 md:w-56 h-auto"
+            <AcademyLogo
+              variant="dark"
+              priority
+              className="h-16 w-auto sm:h-20 md:h-24"
             />
           </motion.div>
 

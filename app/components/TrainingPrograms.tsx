@@ -48,7 +48,7 @@ export default function TrainingPrograms() {
   };
 
   return (
-    <section id="programlar" className="relative bg-black py-20 md:py-32">
+    <section id="programlar" className="relative scroll-mt-20 bg-black py-20 md:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505] to-black pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">

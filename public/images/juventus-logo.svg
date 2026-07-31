@@ -1,1 +1,9 @@
-404: Not Found
+<svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="500" rx="112" fill="white"/>
+  <path d="M250 420C343.4 420 420 343.4 420 250C420 156.6 343.4 80 250 80C156.6 80 80 156.6 80 250C80 343.4 156.6 420 250 420Z" stroke="black" stroke-width="12"/>
+  <path d="M250 450C360.4 450 450 360.4 450 250C450 139.6 360.4 50 250 50C139.6 50 50 139.6 50 250C50 360.4 139.6 450 250 450Z" stroke="black" stroke-width="3"/>
+  <rect x="130" y="100" width="22" height="280" rx="6" fill="black"/>
+  <rect x="348" y="100" width="22" height="280" rx="6" fill="black"/>
+  <path d="M195 140V350C195 400 240 410 280 400L380 370" stroke="black" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M175 160C250 90 380 120 380 120" stroke="black" stroke-width="30" stroke-linecap="round"/>
+</svg>

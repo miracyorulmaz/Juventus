@@ -5,10 +5,13 @@ import AcademyFeatures from './components/AcademyFeatures';
 import CoachingStaff from './components/CoachingStaff';
 import RegistrationForm from './components/RegistrationForm';
 import GallerySection from './components/GallerySection';
+import SiteHeader from './components/SiteHeader';
+import AcademyLogo from './components/AcademyLogo';
 
 export default function Home() {
   return (
     <main className="relative bg-black overflow-hidden">
+      <SiteHeader />
       {/* Global background stripes — Juventus iconic */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute -left-8 top-0 bottom-0 w-[6px] bg-white/10 hidden md:block" />
@@ -37,13 +40,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <div className="mb-4 inline-block bg-white rounded-xl px-3 py-2">
-              <img
-                src="/images/juventus-academy-logo.png"
-                alt="Juventus Academy Ankara"
-                className="w-32 h-auto"
-              />
-            </div>
+            <AcademyLogo variant="light" className="mb-5 h-20 w-auto" />
             <p className="text-white/40 text-sm leading-relaxed">
               Juventus FC resmi ortaklığıyla, Batıkent'te dünya standartlarında futbol eğitimi. İtalyan disiplini ve metodolojisi ile geleceğin yıldızlarını yetiştiriyoruz.
             </p>

@@ -57,7 +57,7 @@ export default function RegistrationForm() {
     }`;
 
   return (
-    <section id="kayit" className="relative bg-black py-20 md:py-32">
+    <section id="kayit" className="relative scroll-mt-20 bg-black py-20 md:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505] to-black pointer-events-none" />
 
       {/* Background image */}
