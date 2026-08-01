@@ -39,6 +39,7 @@ next-env.d.ts
 *.png
 
 # Production brand assets are required by the deployed site.
+!app/icon.png
 !public/images/brand/
 !public/images/brand/academy-logo-light.png
 !public/images/brand/academy-logo-dark.png
