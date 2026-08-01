@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.111.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.5.17",
@@ -16,8 +18,10 @@
     "next": "^16.2.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sharp": "^0.35.3",
     "tailwind-merge": "^3.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^20.17.1",
@@ -32,6 +36,12 @@
   },
   "allowScripts": {
     "sharp@0.34.5": true,
+    "sharp@0.35.3": true,
     "unrs-resolver@1.12.2": true
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.25"
+    }
   }
 }

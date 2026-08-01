@@ -24,3 +24,29 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+@layer components {
+  .admin-card {
+    @apply rounded-3xl border border-white/10 bg-[#0A0A0A] p-5 sm:p-7;
+  }
+
+  .admin-label {
+    @apply mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-white/45;
+  }
+
+  .admin-input {
+    @apply w-full rounded-xl border border-white/10 bg-black/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/20 focus:border-amber-400/60 focus:ring-2 focus:ring-amber-400/10;
+  }
+
+  .admin-file {
+    @apply w-full rounded-xl border border-dashed border-white/15 bg-black/50 px-4 py-3 text-sm text-white/60 file:mr-4 file:rounded-lg file:border-0 file:bg-amber-400 file:px-3 file:py-2 file:text-xs file:font-bold file:text-black;
+  }
+
+  .public-input {
+    @apply w-full rounded-2xl border border-white/10 bg-[#050505] px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-white/20 focus:border-amber-400/50 focus:ring-2 focus:ring-amber-400/10;
+  }
+
+  .contact-button {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition;
+  }
+}

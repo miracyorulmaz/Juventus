@@ -31,7 +31,7 @@ export default function TrustAndBranding() {
             </span>
           </h2>
           <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto">
-            Resmi Juventus ortaklığı ile Ankara Batıkent'te, dünya standartlarında futbol eğitimi
+            Resmi Juventus ortaklığı ile Ankara Batıkent&apos;te, dünya standartlarında futbol eğitimi
           </p>
         </motion.div>
 

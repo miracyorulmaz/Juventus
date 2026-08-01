@@ -1,206 +1,26 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle2, User, Users, Calendar, Phone, Shield } from 'lucide-react';
+import { useActionState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Calendar, CheckCircle2, Phone, Send, Shield, User, Users } from 'lucide-react';
+import { submitRegistration, type RegistrationState } from '@/app/actions/registration';
+import type { TrainingProgram } from '@/types/database';
 import JuventusLogo from './JuventusLogo';
 
-export default function RegistrationForm() {
-  const [form, setForm] = useState({
-    parentName: '',
-    playerName: '',
-    birthYear: '',
-    phone: '',
-    days: [] as string[],
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+const initialState: RegistrationState = { ok: false, message: '' };
 
-  const dayList = ['Salı - Çarşamba Paketi', 'Cumartesi - Pazar Paketi', 'Her İkisi de'];
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setForm((p) => ({ ...p, [name]: value }));
-    if (errors[name]) setErrors((p) => ({ ...p, [name]: '' }));
-  };
-
-  const toggleDay = (d: string) => {
-    setForm((p) => ({
-      ...p,
-      days: p.days.includes(d) ? p.days.filter((x) => x !== d) : [...p.days, d],
-    }));
-    if (errors.days) setErrors((p) => ({ ...p, days: '' }));
-  };
-
-  const validate = () => {
-    const e: Record<string, string> = {};
-    if (!form.parentName.trim()) e.parentName = 'Zorunlu alan';
-    if (!form.playerName.trim()) e.playerName = 'Zorunlu alan';
-    if (!form.birthYear) e.birthYear = 'Seçiniz';
-    if (!form.phone.trim()) e.phone = 'Zorunlu alan';
-    if (form.days.length === 0) e.days = 'En az bir gün seçin';
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) {
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 5000);
-    }
-  };
-
-  const inputClass = (name: string) =>
-    `w-full px-4 py-3.5 bg-[#0A0A0A] border rounded-2xl text-white text-sm placeholder:text-white/15 focus:outline-none transition-all ${
-      errors[name] ? 'border-red-500/50' : 'border-white/10 focus:border-amber-400/50'
-    }`;
-
+export default function RegistrationForm({ programs, registrationOpen }: { programs: TrainingProgram[]; registrationOpen: boolean }) {
+  const [state, action, pending] = useActionState(submitRegistration, initialState);
   return (
-    <section id="kayit" className="relative scroll-mt-20 bg-black py-20 md:py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050505] to-black pointer-events-none" />
-
-      {/* Background image */}
-      <div className="absolute inset-0 z-0 opacity-[0.04]">
-        <JuventusLogo className="w-full h-full opacity-[0.04]" color="white" />
-      </div>
-
-      <div className="relative z-10 max-w-2xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
-          <p className="text-amber-400/80 text-xs md:text-sm uppercase tracking-[0.3em] mb-4 font-semibold">
-            Ücretsiz Deneme Antrenmanı
-          </p>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4">
-            Kayıt{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 to-amber-400">
-              Başvurusu
-            </span>
-          </h2>
-          <p className="text-white/50 text-base md:text-lg">
-            Çocuğunuz için ücretsiz deneme antrenmanına katılın.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-[#0A0A0A] border border-white/5 rounded-3xl p-8 md:p-10"
-        >
-          <AnimatePresence mode="wait">
-            {submitted ? (
-              <motion.div
-                key="ok"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center py-12"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
-                  className="w-20 h-20 rounded-full bg-amber-400/10 flex items-center justify-center mx-auto mb-6"
-                >
-                  <CheckCircle2 className="w-10 h-10 text-amber-400" />
-                </motion.div>
-                <h3 className="text-2xl font-bold text-amber-400 mb-2">Başvuru Alındı!</h3>
-                <p className="text-white/40">En kısa sürede sizi arayıp deneme antrenmanı planlayacağız.</p>
-              </motion.div>
-            ) : (
-              <motion.form
-                key="form"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onSubmit={handleSubmit}
-                className="space-y-5"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label className="flex items-center gap-2 text-white/50 text-xs uppercase tracking-wider font-semibold mb-2">
-                      <User className="w-3.5 h-3.5 text-amber-400" /> Veli Ad Soyad
-                    </label>
-                    <input name="parentName" value={form.parentName} onChange={handleChange} placeholder="Ad Soyad" className={inputClass('parentName')} />
-                    {errors.parentName && <p className="text-red-400 text-xs mt-1">{errors.parentName}</p>}
-                  </div>
-                  <div>
-                    <label className="flex items-center gap-2 text-white/50 text-xs uppercase tracking-wider font-semibold mb-2">
-                      <Users className="w-3.5 h-3.5 text-amber-400" /> Sporcu Ad Soyad
-                    </label>
-                    <input name="playerName" value={form.playerName} onChange={handleChange} placeholder="Ad Soyad" className={inputClass('playerName')} />
-                    {errors.playerName && <p className="text-red-400 text-xs mt-1">{errors.playerName}</p>}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label className="flex items-center gap-2 text-white/50 text-xs uppercase tracking-wider font-semibold mb-2">
-                      <Calendar className="w-3.5 h-3.5 text-amber-400" /> Doğum Yılı
-                    </label>
-                    <select name="birthYear" value={form.birthYear} onChange={handleChange} className={inputClass('birthYear') + ' cursor-pointer'}>
-                      <option value="">Seçiniz</option>
-                      {Array.from({ length: 13 }, (_, i) => 2023 - i).map((y) => (
-                        <option key={y} value={y}>{y}</option>
-                      ))}
-                    </select>
-                    {errors.birthYear && <p className="text-red-400 text-xs mt-1">{errors.birthYear}</p>}
-                  </div>
-                  <div>
-                    <label className="flex items-center gap-2 text-white/50 text-xs uppercase tracking-wider font-semibold mb-2">
-                      <Phone className="w-3.5 h-3.5 text-amber-400" /> Telefon
-                    </label>
-                    <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="05XX XXX XX XX" className={inputClass('phone')} />
-                    {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-white/50 text-xs uppercase tracking-wider font-semibold block mb-3">
-                    Tercih Edilen Antrenman Paketi
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {dayList.map((d) => {
-                      const sel = form.days.includes(d);
-                      return (
-                        <button
-                          key={d}
-                          type="button"
-                          onClick={() => toggleDay(d)}
-                          className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all duration-300 ${
-                            sel
-                              ? 'bg-amber-400 text-black border-amber-400'
-                              : 'bg-transparent text-white/30 border-white/10 hover:border-white/30 hover:text-white/60'
-                          }`}
-                        >
-                          {d}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {errors.days && <p className="text-red-400 text-xs mt-1">{errors.days}</p>}
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-2xl bg-amber-400 text-black font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-amber-300 transition-colors group"
-                >
-                  <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  <Shield className="w-4 h-4" />
-                  Buradan Hemen Kayıt Ol (Ücretsiz Deneme)
-                </button>
-              </motion.form>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-    </section>
+    <section id="kayit" className="relative scroll-mt-20 bg-black py-20 md:py-32"><div className="absolute inset-0 bg-gradient-to-b from-[#050505] to-black" /><div className="absolute inset-0 z-0 opacity-[0.04]"><JuventusLogo className="h-full w-full" color="white" /></div><div className="relative z-10 mx-auto max-w-2xl px-6">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center"><p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-amber-400/80 md:text-sm">Ücretsiz Deneme Antrenmanı</p><h2 className="mb-4 text-3xl font-extrabold text-white md:text-5xl">Kayıt <span className="bg-gradient-to-r from-amber-300 to-amber-400 bg-clip-text text-transparent">Başvurusu</span></h2><p className="text-base text-white/50 md:text-lg">Çocuğunuz için ücretsiz deneme antrenmanına katılın.</p></motion.div>
+      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-3xl border border-white/5 bg-[#0A0A0A] p-8 md:p-10">
+        {!registrationOpen ? <div className="py-10 text-center"><Shield className="mx-auto mb-5 h-12 w-12 text-amber-400" /><h3 className="mb-2 text-2xl font-black">Kayıtlar Geçici Olarak Kapalı</h3><p className="text-white/45">Yeni dönem duyuruları için sosyal medya hesaplarımızı takip edebilirsiniz.</p></div> : <AnimatePresence mode="wait">{state.ok ? <motion.div key="success" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="py-12 text-center"><div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-amber-400/10"><CheckCircle2 className="h-10 w-10 text-amber-400" /></div><h3 className="mb-2 text-2xl font-bold text-amber-400">Başvuru Alındı!</h3><p className="text-white/45">{state.message}</p></motion.div> : <motion.form key="form" action={action} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5"><input name="website" tabIndex={-1} autoComplete="off" className="absolute -left-[9999px]" aria-hidden="true" /><div className="grid gap-5 md:grid-cols-2"><FormField name="parent_name" label="Veli Ad Soyad" icon={<User className="h-3.5 w-3.5" />} error={state.fieldErrors?.parent_name} /><FormField name="player_name" label="Sporcu Ad Soyad" icon={<Users className="h-3.5 w-3.5" />} error={state.fieldErrors?.player_name} /></div><div className="grid gap-5 md:grid-cols-2"><div><Label icon={<Calendar className="h-3.5 w-3.5" />}>Doğum Yılı</Label><select name="birth_year" required className="public-input"><option value="">Seçiniz</option>{Array.from({ length: 16 }, (_, index) => new Date().getFullYear() - 2 - index).map((year) => <option key={year} value={year}>{year}</option>)}</select>{state.fieldErrors?.birth_year ? <ErrorText text={state.fieldErrors.birth_year} /> : null}</div><FormField name="phone" label="Telefon" type="tel" placeholder="05XX XXX XX XX" icon={<Phone className="h-3.5 w-3.5" />} error={state.fieldErrors?.phone} /></div><div><Label>Tercih Edilen Program</Label><select name="selected_program" required className="public-input"><option value="">Program seçin</option>{programs.map((program) => <option key={program.id} value={`${program.age_range} · ${program.title}`}>{program.age_range} · {program.title}</option>)}</select>{state.fieldErrors?.selected_program ? <ErrorText text={state.fieldErrors.selected_program} /> : null}</div>{state.message && !state.ok ? <p role="alert" className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">{state.message}</p> : null}<button type="submit" disabled={pending} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-amber-400 py-4 text-sm font-bold uppercase tracking-wider text-black transition hover:bg-amber-300 disabled:cursor-wait disabled:opacity-60"><Send className="h-4 w-4" /><Shield className="h-4 w-4" />{pending ? 'Başvuru gönderiliyor...' : 'Hemen Kayıt Ol (Ücretsiz Deneme)'}</button></motion.form>}</AnimatePresence>}
+      </motion.div>
+    </div></section>
   );
 }
+
+function Label({ children, icon }: { children: React.ReactNode; icon?: React.ReactNode }) { return <label className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/50">{icon ? <span className="text-amber-400">{icon}</span> : null}{children}</label>; }
+function FormField({ name, label, icon, type = 'text', placeholder, error }: { name: string; label: string; icon: React.ReactNode; type?: string; placeholder?: string; error?: string }) { return <div><Label icon={icon}>{label}</Label><input name={name} type={type} placeholder={placeholder ?? 'Ad Soyad'} required className="public-input" />{error ? <ErrorText text={error} /> : null}</div>; }
+function ErrorText({ text }: { text: string }) { return <p className="mt-1 text-xs text-red-400">{text}</p>; }

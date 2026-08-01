@@ -1,80 +1,25 @@
-import HeroSection from './components/HeroSection';
-import TrustAndBranding from './components/TrustAndBranding';
-import TrainingPrograms from './components/TrainingPrograms';
 import AcademyFeatures from './components/AcademyFeatures';
 import CoachingStaff from './components/CoachingStaff';
-import RegistrationForm from './components/RegistrationForm';
+import FloatingSocials from './components/FloatingSocials';
 import GallerySection from './components/GallerySection';
+import HeroSection from './components/HeroSection';
+import RegistrationForm from './components/RegistrationForm';
+import SiteFooter from './components/SiteFooter';
 import SiteHeader from './components/SiteHeader';
-import AcademyLogo from './components/AcademyLogo';
+import SocialMediaSection from './components/SocialMediaSection';
+import TrainingPrograms from './components/TrainingPrograms';
+import TrustAndBranding from './components/TrustAndBranding';
+import VisitSection from './components/VisitSection';
+import { getPublicContent } from '@/lib/queries/public';
 
-export default function Home() {
+export default async function Home() {
+  const { settings, programs, coaches, gallery } = await getPublicContent();
   return (
-    <main className="relative bg-black overflow-hidden">
+    <main className="relative overflow-hidden bg-black">
       <SiteHeader />
-      {/* Global background stripes — Juventus iconic */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute -left-8 top-0 bottom-0 w-[6px] bg-white/10 hidden md:block" />
-        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-white/5 hidden md:block" />
-        <div className="absolute -right-8 top-0 bottom-0 w-[6px] bg-white/10 hidden md:block" />
-        <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-white/5 hidden md:block" />
-      </div>
-
-      <div className="relative z-10">
-        <HeroSection />
-        <TrustAndBranding />
-        <GallerySection />
-        <TrainingPrograms />
-        <AcademyFeatures />
-        <CoachingStaff />
-        <RegistrationForm />
-        <Footer />
-      </div>
+      <div className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden md:block"><div className="absolute -left-8 inset-y-0 w-[6px] bg-white/10" /><div className="absolute left-0 inset-y-0 w-[2px] bg-white/5" /><div className="absolute -right-8 inset-y-0 w-[6px] bg-white/10" /><div className="absolute right-0 inset-y-0 w-[2px] bg-white/5" /></div>
+      <div className="relative z-10"><HeroSection title={settings.hero_title} description={settings.hero_description} /><TrustAndBranding /><GallerySection images={gallery} /><SocialMediaSection settings={settings} images={gallery} /><TrainingPrograms programs={programs} /><AcademyFeatures /><CoachingStaff coaches={coaches} /><RegistrationForm programs={programs} registrationOpen={settings.registration_open} /><VisitSection settings={settings} /><SiteFooter settings={settings} /></div>
+      <FloatingSocials settings={settings} />
     </main>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="relative bg-[#0A0A0A] border-t border-white/5 py-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-          <div>
-            <AcademyLogo variant="light" className="mb-5 h-20 w-auto" />
-            <p className="text-white/40 text-sm leading-relaxed">
-              Juventus FC resmi ortaklığıyla, Batıkent'te dünya standartlarında futbol eğitimi. İtalyan disiplini ve metodolojisi ile geleceğin yıldızlarını yetiştiriyoruz.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Hızlı Linkler</h4>
-            <ul className="space-y-2 text-sm text-white/40">
-              {['Programlar', 'Tesisler', 'Kayıt', 'İletişim'].map((l) => (
-                <li key={l} className="hover:text-white/70 cursor-pointer transition-colors">{l}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">İletişim</h4>
-            <div className="space-y-2 text-sm text-white/40">
-              <p>Batıkent, Ankara</p>
-              <p className="text-white/60">0540 005 10 57</p>
-              <p className="text-white/60">0538 929 98 06</p>
-              <p className="text-white/60">juventusacademybatikent@gmail.com</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/20 text-xs">
-            Juventus FC tescilli markası ve logosu, Juventus Football Club S.p.A.'nın mülkiyetindedir.
-          </p>
-          <p className="text-white/30 text-xs">
-            © {new Date().getFullYear()} Juventus Academy Batıkent. Tüm hakları saklıdır.
-          </p>
-        </div>
-      </div>
-    </footer>
   );
 }
