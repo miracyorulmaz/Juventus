@@ -40,11 +40,12 @@ on conflict (id) do update set name = excluded.name, role = excluded.role, biogr
 photo_url = excluded.photo_url, display_order = excluded.display_order, is_active = excluded.is_active;
 
 insert into public.training_programs (id, title, age_range, schedule, description, capacity_text, display_order, is_active) values
-('00000000-0000-0000-0003-000000000001', 'Mini Başlangıç Grubu', '3 - 6 Yaş', 'Haftada 2-4 antrenman', 'Top ile tanışma, temel koordinasyon ve oyun eğlencesiyle futbola ilk adım.', '1:6 antrenör-oyuncu', 1, true),
-('00000000-0000-0000-0003-000000000002', 'Başlangıç Grubu', '6 - 9 Yaş', 'Haftada 2-4 antrenman', 'Temel futbol becerileri, koordinasyon gelişimi ve takımla ilk tanışma.', '1:8 antrenör-oyuncu', 2, true),
-('00000000-0000-0000-0003-000000000003', 'Gelişim Grubu', '9 - 12 Yaş', 'Haftada 2-4 antrenman', 'Teknik beceri geliştirme, taktik anlayışı ve takım çalışması odaklı eğitim.', '1:8 antrenör-oyuncu', 3, true),
-('00000000-0000-0000-0003-000000000004', 'Performans Grubu', '12 - 15 Yaş', 'Haftada 2-4 antrenman', 'İleri seviye taktik, fiziksel kondisyon ve rekabetçi maç ortamı.', '1:10 antrenör-oyuncu', 4, true),
-('00000000-0000-0000-0003-000000000005', 'Bireysel Gelişim Programı', 'Tüm Yaş Grupları', 'Randevu ile özel ders', 'Oyuncunun teknik, fiziksel ve pozisyonel ihtiyaçlarına göre hazırlanan bire bir gelişim antrenmanları.', '1:1 antrenör-oyuncu', 5, true)
+('00000000-0000-0000-0003-000000000001', 'Mini Başlangıç Grubu', '3 - 6 Yaş', 'Hafta sonu antrenmanları', 'Top ile tanışma, temel koordinasyon ve oyun eğlencesiyle futbola ilk adım.', '1:6 antrenör-oyuncu', 1, true),
+('00000000-0000-0000-0003-000000000002', 'Başlangıç Grubu', '6 - 9 Yaş', 'Hafta sonu antrenmanları', 'Temel futbol becerileri, koordinasyon gelişimi ve takımla ilk tanışma.', '1:8 antrenör-oyuncu', 2, true),
+('00000000-0000-0000-0003-000000000003', 'Gelişim Grubu', '9 - 12 Yaş', 'Hafta sonu antrenmanları', 'Teknik beceri geliştirme, taktik anlayışı ve takım çalışması odaklı eğitim.', '1:8 antrenör-oyuncu', 3, true),
+('00000000-0000-0000-0003-000000000004', 'Performans Grubu', '12 - 15 Yaş', 'Hafta sonu antrenmanları', 'İleri seviye taktik, fiziksel kondisyon ve rekabetçi maç ortamı.', '1:10 antrenör-oyuncu', 4, true),
+('00000000-0000-0000-0003-000000000006', 'Ekstra Hafta İçi Grupları', '3 - 15 Yaş', 'Hafta içi antrenmanları', 'Dar alan oyunlarıyla top hâkimiyeti, çabuk karar verme ve teknik beceri gelişimine odaklanan grup antrenmanları.', 'Yaş ve seviyeye göre grup', 5, true),
+('00000000-0000-0000-0003-000000000005', 'Bireysel Gelişim Programı', 'Tüm Yaş Grupları', 'Randevu ile özel ders', 'Oyuncunun teknik, fiziksel ve pozisyonel ihtiyaçlarına göre hazırlanan bire bir gelişim antrenmanları.', '1:1 antrenör-oyuncu', 6, true)
 on conflict (id) do update set title = excluded.title, age_range = excluded.age_range, schedule = excluded.schedule,
 description = excluded.description, capacity_text = excluded.capacity_text, display_order = excluded.display_order,
 is_active = excluded.is_active;
