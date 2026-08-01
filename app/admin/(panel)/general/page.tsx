@@ -30,7 +30,7 @@ export default async function GeneralSettingsPage({ searchParams }: Props) {
           <div><label className={label}>Birinci Telefon</label><input name="phone_primary" defaultValue={settings.phone_primary} required className={field} /></div>
           <div><label className={label}>İkinci Telefon</label><input name="phone_secondary" defaultValue={settings.phone_secondary} className={field} /></div>
           <div><label className={label}>WhatsApp Numarası</label><input name="whatsapp_number" defaultValue={settings.whatsapp_number} required className={field} /></div>
-          <div><label className={label}>E-posta</label><input name="email" type="email" defaultValue={settings.email} required className={field} /></div>
+          <div><label className={label}>E-posta</label><input name="email" type="email" defaultValue={settings.email} required className={field} /><p className="mt-2 text-xs text-white/35">Yeni kayıt başvurusu bildirimleri bu adrese gönderilir.</p></div>
           <div className="md:col-span-2"><label className={label}>WhatsApp Hazır Mesajı</label><textarea name="whatsapp_message" defaultValue={settings.whatsapp_message} rows={3} className={field} /></div>
           <Toggle name="whatsapp_enabled" label="WhatsApp butonu açık" checked={settings.whatsapp_enabled} />
           <Toggle name="registration_open" label="Kayıt formu açık" checked={settings.registration_open} />

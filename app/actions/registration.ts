@@ -1,6 +1,7 @@
 'use server';
 
 import { headers } from 'next/headers';
+import { sendRegistrationNotification } from '@/lib/email/registration-notification';
 import { getPublicSupabase } from '@/lib/supabase/public';
 import { normalizePhone } from '@/lib/utils/contact';
 import { registrationSchema } from '@/lib/validations/schemas';
@@ -59,7 +60,7 @@ export async function submitRegistration(
 
   const { website: _honeypot, ...application } = parsed.data;
   const [settingsResult, programsResult] = await Promise.all([
-    supabase.from('site_settings').select('registration_open').limit(1).maybeSingle(),
+    supabase.from('site_settings').select('academy_name, email, registration_open').limit(1).maybeSingle(),
     supabase.from('training_programs').select('title, age_range').eq('is_active', true),
   ]);
   if (!settingsResult.data?.registration_open) {
@@ -71,13 +72,30 @@ export async function submitRegistration(
   if (!validProgram) {
     return { ok: false, message: 'Seçilen program artık aktif değil. Lütfen sayfayı yenileyin.' };
   }
+  const applicationId = crypto.randomUUID();
+  const submittedAt = new Date().toISOString();
+  const normalizedPhone = normalizePhone(application.phone);
   const { error } = await supabase.from('registration_applications').insert({
+    id: applicationId,
     ...application,
-    phone: normalizePhone(application.phone),
+    phone: normalizedPhone,
     status: 'new',
     admin_note: '',
   });
 
   if (error) return { ok: false, message: 'Başvurunuz kaydedilemedi. Lütfen tekrar deneyin.' };
+
+  await sendRegistrationNotification({
+    academyName: settingsResult.data.academy_name,
+    applicationId,
+    recipient: settingsResult.data.email,
+    parentName: application.parent_name,
+    playerName: application.player_name,
+    birthYear: application.birth_year,
+    phone: normalizedPhone,
+    selectedProgram: application.selected_program,
+    submittedAt,
+  });
+
   return { ok: true, message: 'Başvurunuz alındı. En kısa sürede sizinle iletişime geçeceğiz.' };
 }

@@ -33,12 +33,21 @@ export const DEFAULT_SETTINGS: SiteSettings = {
 
 export const DEFAULT_COACHES: Coach[] = [
   {
+    id: '00000000-0000-0000-0001-000000000003',
+    name: 'Kadir Cerrahoğlu',
+    role: 'Antrenör',
+    biography: 'Oyuncuların saha içi karar verme ve takım oyununu geliştirmesine destek olur.',
+    photo_url: '/images/coaches/kadir-cerrahoglu.jpg',
+    display_order: 1,
+    is_active: true,
+  },
+  {
     id: '00000000-0000-0000-0001-000000000001',
     name: 'Abbas Saraç',
     role: 'Antrenör',
     biography: 'Juventus metodolojisiyle oyuncu gelişimine odaklanan akademi antrenörü.',
     photo_url: '/images/coaches/abbas-sarac.jpg',
-    display_order: 1,
+    display_order: 2,
     is_active: true,
   },
   {
@@ -47,15 +56,6 @@ export const DEFAULT_COACHES: Coach[] = [
     role: 'Antrenör',
     biography: 'Teknik gelişim ve yaş gruplarına uygun antrenman planlaması konusunda uzman.',
     photo_url: '/images/coaches/onurcan-cinarci.jpg',
-    display_order: 2,
-    is_active: true,
-  },
-  {
-    id: '00000000-0000-0000-0001-000000000003',
-    name: 'Kadir Cerrahoğlu',
-    role: 'Antrenör',
-    biography: 'Oyuncuların saha içi karar verme ve takım oyununu geliştirmesine destek olur.',
-    photo_url: '/images/coaches/kadir-cerrahoglu.jpg',
     display_order: 3,
     is_active: true,
   },
@@ -129,6 +129,16 @@ export const DEFAULT_PROGRAMS: TrainingProgram[] = [
     description: 'İleri seviye taktik, fiziksel kondisyon ve rekabetçi maç ortamı.',
     capacity_text: '1:10 antrenör-oyuncu',
     display_order: 4,
+    is_active: true,
+  },
+  {
+    id: '00000000-0000-0000-0003-000000000005',
+    title: 'Bireysel Gelişim Programı',
+    age_range: 'Tüm Yaş Grupları',
+    schedule: 'Randevu ile özel ders',
+    description: 'Oyuncunun teknik, fiziksel ve pozisyonel ihtiyaçlarına göre hazırlanan bire bir gelişim antrenmanları.',
+    capacity_text: '1:1 antrenör-oyuncu',
+    display_order: 5,
     is_active: true,
   },
 ];

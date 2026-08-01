@@ -33,9 +33,9 @@ insert into public.site_settings (
   registration_open = excluded.registration_open;
 
 insert into public.coaches (id, name, role, biography, photo_url, display_order, is_active) values
-('00000000-0000-0000-0001-000000000001', 'Abbas Saraç', 'Antrenör', 'Juventus metodolojisiyle oyuncu gelişimine odaklanan akademi antrenörü.', '/images/coaches/abbas-sarac.jpg', 1, true),
-('00000000-0000-0000-0001-000000000002', 'Onurcan Çınarcı', 'Antrenör', 'Teknik gelişim ve yaş gruplarına uygun antrenman planlaması konusunda uzman.', '/images/coaches/onurcan-cinarci.jpg', 2, true),
-('00000000-0000-0000-0001-000000000003', 'Kadir Cerrahoğlu', 'Antrenör', 'Oyuncuların saha içi karar verme ve takım oyununu geliştirmesine destek olur.', '/images/coaches/kadir-cerrahoglu.jpg', 3, true)
+('00000000-0000-0000-0001-000000000003', 'Kadir Cerrahoğlu', 'Antrenör', 'Oyuncuların saha içi karar verme ve takım oyununu geliştirmesine destek olur.', '/images/coaches/kadir-cerrahoglu.jpg', 1, true),
+('00000000-0000-0000-0001-000000000001', 'Abbas Saraç', 'Antrenör', 'Juventus metodolojisiyle oyuncu gelişimine odaklanan akademi antrenörü.', '/images/coaches/abbas-sarac.jpg', 2, true),
+('00000000-0000-0000-0001-000000000002', 'Onurcan Çınarcı', 'Antrenör', 'Teknik gelişim ve yaş gruplarına uygun antrenman planlaması konusunda uzman.', '/images/coaches/onurcan-cinarci.jpg', 3, true)
 on conflict (id) do update set name = excluded.name, role = excluded.role, biography = excluded.biography,
 photo_url = excluded.photo_url, display_order = excluded.display_order, is_active = excluded.is_active;
 
@@ -43,7 +43,8 @@ insert into public.training_programs (id, title, age_range, schedule, descriptio
 ('00000000-0000-0000-0003-000000000001', 'Mini Başlangıç Grubu', '3 - 6 Yaş', 'Haftada 2-4 antrenman', 'Top ile tanışma, temel koordinasyon ve oyun eğlencesiyle futbola ilk adım.', '1:6 antrenör-oyuncu', 1, true),
 ('00000000-0000-0000-0003-000000000002', 'Başlangıç Grubu', '6 - 9 Yaş', 'Haftada 2-4 antrenman', 'Temel futbol becerileri, koordinasyon gelişimi ve takımla ilk tanışma.', '1:8 antrenör-oyuncu', 2, true),
 ('00000000-0000-0000-0003-000000000003', 'Gelişim Grubu', '9 - 12 Yaş', 'Haftada 2-4 antrenman', 'Teknik beceri geliştirme, taktik anlayışı ve takım çalışması odaklı eğitim.', '1:8 antrenör-oyuncu', 3, true),
-('00000000-0000-0000-0003-000000000004', 'Performans Grubu', '12 - 15 Yaş', 'Haftada 2-4 antrenman', 'İleri seviye taktik, fiziksel kondisyon ve rekabetçi maç ortamı.', '1:10 antrenör-oyuncu', 4, true)
+('00000000-0000-0000-0003-000000000004', 'Performans Grubu', '12 - 15 Yaş', 'Haftada 2-4 antrenman', 'İleri seviye taktik, fiziksel kondisyon ve rekabetçi maç ortamı.', '1:10 antrenör-oyuncu', 4, true),
+('00000000-0000-0000-0003-000000000005', 'Bireysel Gelişim Programı', 'Tüm Yaş Grupları', 'Randevu ile özel ders', 'Oyuncunun teknik, fiziksel ve pozisyonel ihtiyaçlarına göre hazırlanan bire bir gelişim antrenmanları.', '1:1 antrenör-oyuncu', 5, true)
 on conflict (id) do update set title = excluded.title, age_range = excluded.age_range, schedule = excluded.schedule,
 description = excluded.description, capacity_text = excluded.capacity_text, display_order = excluded.display_order,
 is_active = excluded.is_active;

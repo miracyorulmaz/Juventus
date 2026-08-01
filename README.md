@@ -9,6 +9,7 @@ Juventus Academy Batıkent public sitesi ve Supabase tabanlı içerik yönetim p
 - Genel ayarlar, antrenörler, galeri, programlar ve başvurular için yönetim ekranları
 - Supabase PostgreSQL, Row Level Security ve Storage
 - Gerçek kayıt başvurusu, Zod doğrulama, honeypot ve basit rate limit
+- Yeni kayıtları yönetim panelinde tanımlanan adrese ileten Resend e-posta bildirimi
 - Yönetilebilir WhatsApp, Instagram ve güvenli Google Maps bölümü
 - Credential bulunmadığında public sitenin çökmesini engelleyen merkezi fallback içerik
 - Vercel uyumlu production build ve cache invalidation
@@ -17,6 +18,7 @@ Juventus Academy Batıkent public sitesi ve Supabase tabanlı içerik yönetim p
 
 - Node.js 20 veya üzeri
 - Bir Supabase projesi
+- Sitede tanımlı bildirim e-postasıyla açılmış bir Resend hesabı
 - Vercel projesi (production deployment için)
 
 ## Local geliştirme
@@ -45,10 +47,14 @@ Admin girişi: `http://localhost:3000/admin/login`
 NEXT_PUBLIC_SUPABASE_URL=https://PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+RESEND_API_KEY=re_xxxxxxxxx
+RESEND_FROM_EMAIL=Juventus Academy Batikent <onboarding@resend.dev>
 ```
 
 - `NEXT_PUBLIC_SUPABASE_URL` ve `NEXT_PUBLIC_SUPABASE_ANON_KEY` public istemci tarafından kullanılabilir.
 - `SUPABASE_SERVICE_ROLE_KEY` yalnızca Server Action ve server query modüllerinde kullanılır.
+- `RESEND_API_KEY` yalnızca sunucuda yeni kayıt bildirimini göndermek için kullanılır.
+- `RESEND_FROM_EMAIL` bildirimde görünecek gönderen adresidir. Başlangıçta Resend'in test göndericisi kullanılabilir.
 - Service role key'i `NEXT_PUBLIC_` ile başlayan bir değişkene koymayın ve client component içine import etmeyin.
 - Gerçek credential değerlerini Git'e commit etmeyin.
 
@@ -144,6 +150,17 @@ Supabase henüz bağlı değilse public site `lib/content/defaults.ts` içindeki
 
 Proses içi rate limit temel spam korumasıdır. Yoğun trafik altında dağıtık bir rate limit servisiyle güçlendirilebilir.
 
+## Kayıt başvurusu e-posta bildirimi
+
+Kayıt formu başarıyla gönderildiğinde başvuru önce Supabase'e kaydedilir. Kayıt tamamlandıktan sonra Resend üzerinden, Admin → Genel Ayarlar ekranındaki **E-posta** alanına bir bildirim gönderilir. E-posta servisi geçici hata verse bile Supabase kaydı korunur ve başvuru yönetim panelinden görülebilir.
+
+1. [Resend](https://resend.com) hesabını Admin → Genel Ayarlar ekranındaki bildirim e-postasıyla oluşturun.
+2. Resend → API Keys bölümünden bir API key üretin.
+3. Vercel → Project Settings → Environment Variables bölümüne `RESEND_API_KEY` değerini ve `RESEND_FROM_EMAIL` için `Juventus Academy Batikent <onboarding@resend.dev>` değerini ekleyin.
+4. Vercel'de yeni deployment başlatın ve test kayıt formu gönderin.
+
+Resend'in `onboarding@resend.dev` test göndericisi yalnızca Resend hesabıyla ilişkili kendi e-posta adresinize mail gönderebilir. Yönetim panelindeki alıcı adresini daha sonra farklı bir adrese çevirirseniz veya markalı bir gönderici istiyorsanız Resend → Domains bölümünde size ait alan adını SPF ve DKIM kayıtlarıyla doğrulayın; ardından `RESEND_FROM_EMAIL` değerini örneğin `Juventus Academy Batikent <kayit@updates.sizinalanadiniz.com>` olarak güncelleyin. Her başvuru benzersiz bir idempotency anahtarıyla gönderildiği için aynı bildirim yeniden denendiğinde çift mail riski azaltılır.
+
 ## Google Maps güvenliği
 
 Admin paneli iframe HTML kabul etmez. Yalnızca HTTPS kullanan izinli Google Maps host'ları kaydedilebilir. Public sayfa URL'yi yeniden doğrular ve yalnızca güvenliyse iframe render eder.
@@ -152,7 +169,7 @@ Admin paneli iframe HTML kabul etmez. Yalnızca HTTPS kullanan izinli Google Map
 
 1. GitHub repository'sini Vercel'e bağlayın.
 2. Framework Preset olarak Next.js seçin.
-3. Project Settings → Environment Variables bölümüne üç Supabase değişkenini Production, Preview ve Development kapsamlarında ekleyin.
+3. Project Settings → Environment Variables bölümüne üç Supabase değişkenini ve iki Resend değişkenini Production, Preview ve Development kapsamlarında ekleyin.
 4. `main` branch'ine push yapın veya Vercel üzerinden yeniden deploy başlatın.
 
 ```bash
